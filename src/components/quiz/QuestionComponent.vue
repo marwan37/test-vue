@@ -1,3 +1,4 @@
+<!-- quiz/QuestionComponent.vue -->
 <template>
   <div class="p-fluid">
     <div class="p-field">
@@ -5,6 +6,7 @@
     </div>
     <div v-for="(option, index) in currentQuestion.options" :key="option.id" class="p-field">
       <AnswerOption
+        @select-option="handleSelectOption"
         :label="labels[index]"
         :text="option.text"
         :is-selected="selectedOptionIndices.includes(index)"
@@ -37,6 +39,7 @@ import QuestionExplanation from './QuestionExplanation.vue';
 import type { Question } from '@/types';
 import type { ComputedRef } from 'vue';
 import { useToast } from 'vue-toastification';
+import * as mutationTypes from '@/store/mutation-types';
 
 export default defineComponent({
   name: 'QuestionComponent',
@@ -46,7 +49,7 @@ export default defineComponent({
     QuestionExplanation,
     Button
   },
-  setup: function () {
+  setup() {
     const store = useStore();
     const toast = useToast();
 
@@ -56,7 +59,9 @@ export default defineComponent({
     const selectedOptionIndices = computed(
       () => store.state.selectedAnswers[currentQuestion.value.id] || []
     );
-    const isQuestionSubmitted = computed(() => store.state.isSubmitted[currentQuestion.value.id] || false);
+    const isQuestionSubmitted = computed(
+      () => store.state.isSubmitted[currentQuestion.value.id] || false
+    );
     const isQuestionAnswered = computed(
       () => currentQuestion.value.id in store.state.selectedAnswers
     );
@@ -68,7 +73,7 @@ export default defineComponent({
         selectedOptionIndices.value.length ===
         currentQuestion.value.options.filter(opt => opt.isCorrect).length
       ) {
-        store.commit('submitAnswer', currentQuestion.value.id);
+        store.commit(mutationTypes.SUBMIT_ANSWER, currentQuestion.value.id);
       } else {
         const requiredAnswers = currentQuestion.value.options.filter(opt => opt.isCorrect).length;
         toast.warning(`Please select ${requiredAnswers} answer(s).`, {
@@ -76,6 +81,16 @@ export default defineComponent({
           closeOnClick: true
         });
       }
+    };
+
+    const handleSelectOption = ({
+      questionId,
+      optionIndex
+    }: {
+      questionId: string;
+      optionIndex: number;
+    }) => {
+      store.commit('SELECT_ANSWER', { questionId, optionIndex });
     };
 
     const correctAnswerIndices = computed(() =>
@@ -98,6 +113,7 @@ export default defineComponent({
       mode,
       labels,
       handleSubmit,
+      handleSelectOption,
       correctAnswers,
       percentageCorrect,
       timeSpent,

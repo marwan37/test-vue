@@ -1,10 +1,10 @@
 // store/index.ts
-import { type InjectionKey } from 'vue'
-import type { QuizState, QuizMode, QuizResult } from '@/types';
-import { createStore, Store } from 'vuex'
-import * as mutationTypes from './mutation-types';
-import * as actionTypes from './action-types';
 import practiceQuestions from '@/qbank/practice_1.json';
+import type { QuizState } from '@/types';
+import { type InjectionKey } from 'vue';
+import { Store, createStore } from 'vuex';
+import * as actionTypes from './action-types';
+import * as mutationTypes from './mutation-types';
 
 export const initialState: QuizState = {
   questions: practiceQuestions,
@@ -23,47 +23,43 @@ export const key: InjectionKey<Store<QuizState>> = Symbol()
 const store = createStore<QuizState>({
   state: initialState,
   mutations: {
-    [mutationTypes.SET_MODE](state: QuizState, mode: QuizMode) {
+    [mutationTypes.SET_MODE](state, mode) {
       state.mode = mode;
     },
-    [mutationTypes.SELECT_ANSWER](state: QuizState, { questionId, optionIndex }: { questionId: string; optionIndex: number }) {
+    [mutationTypes.SELECT_ANSWER](state, { questionId, optionIndex }) {
       const question = state.questions.find((q) => q.id === questionId);
       if (question) {
         const numberOfCorrectAnswers = question.options.filter((option) => option.isCorrect).length;
         if (numberOfCorrectAnswers === 1) {
           // Single-answer question
-          return {
-            selectedAnswers: { ...state.selectedAnswers, [questionId]: [optionIndex] },
-          };
+          state.selectedAnswers[questionId] = [optionIndex];
+        } else {
+          // Multiple-answer question
+          const selectedAnswers = state.selectedAnswers[questionId] || [];
+          const updatedAnswers = selectedAnswers.includes(optionIndex)
+            ? selectedAnswers.filter((index) => index !== optionIndex)
+            : [...selectedAnswers, optionIndex];
+          state.selectedAnswers[questionId] = updatedAnswers;
         }
-        // Multiple-answer question
-        const selectedAnswers = state.selectedAnswers[questionId] || [];
-        const updatedAnswers = selectedAnswers.includes(optionIndex)
-          ? selectedAnswers.filter((index) => index !== optionIndex)
-          : [...selectedAnswers, optionIndex];
-        return {
-          selectedAnswers: { ...state.selectedAnswers, [questionId]: updatedAnswers },
-        };
       }
-      return state;
     },
-    [mutationTypes.SUBMIT_ANSWER](state: QuizState, questionId: string) {
+    [mutationTypes.SUBMIT_ANSWER](state, questionId) {
       state.isSubmitted[questionId] = true;
     },
-    [mutationTypes.NEXT_QUESTION](state: QuizState) {
+    [mutationTypes.NEXT_QUESTION](state) {
       if (state.currentQuestionIndex < state.questions.length - 1) {
         state.currentQuestionIndex += 1;
       }
     },
-    [mutationTypes.PREV_QUESTION](state: QuizState) {
+    [mutationTypes.PREV_QUESTION](state) {
       if (state.currentQuestionIndex > 0) {
         state.currentQuestionIndex -= 1;
       }
     },
-    [mutationTypes.ADD_QUIZ_RESULT](state: QuizState, result: QuizResult) {
+    [mutationTypes.ADD_QUIZ_RESULT](state, result) {
       state.quizHistory.push(result);
     },
-    [mutationTypes.RESET_QUIZ](state: QuizState) {
+    [mutationTypes.RESET_QUIZ](state) {
       state.timer = state.mode === 'timed' ? state.questions.length * 90 : 0;
       state.isSubmitted = {};
       state.selectedAnswers = {};
@@ -82,7 +78,7 @@ const store = createStore<QuizState>({
     },
   },
   getters: {
-    currentQuestion: (state: QuizState) => state.questions[state.currentQuestionIndex],
+    currentQuestion: (state) => state.questions[state.currentQuestionIndex],
   },
 });
 

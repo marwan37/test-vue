@@ -5,7 +5,7 @@ import router from './router';
 import store from './store';
 import PrimeVue from 'primevue/config';
 import './main.css';
-
+import 'vue-toastification/dist/index.css';
 
 const app = createApp(App);
 app.use(Toast);

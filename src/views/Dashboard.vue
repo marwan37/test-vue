@@ -4,41 +4,33 @@
     <div class="grid">
       <div class="col-12">
         <div class="card">
-          <h2 class="text-center">AWS Exam Prep</h2>
+          <h1 class="text-center text-xl">AWS Exam Prep</h1>
+          <div class="flex justify-center mt-4">
+            <Button
+              label="Tutor"
+              class="mr-4"
+              @click="handleQuizStart('tutor')"
+              style="width: 20%; max-width: 20rem" />
+            <Button
+              label="Timed"
+              @click="handleQuizStart('timed')"
+              style="width: 20%; max-width: 20rem" />
+          </div>
         </div>
       </div>
-      <div class="col-12 md:col-6">
-        <Card>
-          <template #content>
-            <QuizStats
-              :totalQuizzes="totalQuizzes"
-              :totalCorrectAnswers="totalCorrectAnswers"
-              :totalIncorrectAnswers="totalIncorrectAnswers"
-              :accuracy="accuracy" />
-          </template>
-        </Card>
+      <div class="card">
+        <QuizStats
+          :totalQuizzes="totalQuizzes"
+          :totalCorrectAnswers="totalCorrectAnswers"
+          :totalIncorrectAnswers="totalIncorrectAnswers"
+          :accuracy="accuracy" />
       </div>
       <div class="col-12 md:col-6">
         <div class="card">
           <PieChartComponent :data="pieChartData" />
         </div>
       </div>
-      <div class="col-12">
-        <div class="card">
-          <div class="flex justify-content-center">
-            <Button
-              label="Start Tutor Mode"
-              @click="handleQuizStart('tutor')"
-              class="p-button-success mr-2"
-              style="width: 100%; max-width: 20rem" />
-            <Button
-              label="Start Timed Mode"
-              @click="handleQuizStart('timed')"
-              class="p-button-info"
-              style="width: 100%; max-width: 20rem" />
-          </div>
-        </div>
-      </div>
+
       <div class="col-12">
         <div class="card">
           <QuizHistory :quizHistory="quizHistory" />
@@ -57,7 +49,6 @@ import QuizStats from '@/components/dashboard/QuizStats.vue';
 import PieChartComponent from '@/components/dashboard/PieChartComponent.vue';
 import QuizHistory from '@/components/dashboard/QuizHistory.vue';
 import Button from 'primevue/button';
-import Card from 'primevue/card';
 import * as mutationTypes from '@/store/mutation-types';
 
 const store = useStore();

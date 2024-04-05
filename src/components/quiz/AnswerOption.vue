@@ -1,16 +1,19 @@
+<!-- quiz/AnswerOption.vue -->
 <template>
   <Button
     :label="label + '. ' + text"
     :class="buttonClass"
     :disabled="isSubmitted"
-    @click="onClick" />
+    @click="onClick">
+    <template #icon>
+      <span>{{ label }}.</span>
+    </template>
+  </Button>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
-import { useStore } from 'vuex';
 import Button from 'primevue/button';
-import * as mutationTypes from '@/store/mutation-types';
 
 export default defineComponent({
   name: 'AnswerOption',
@@ -47,9 +50,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props) {
-    const store = useStore();
-
+  setup(props, { emit }) {
     const buttonClass = computed(() => {
       if (props.isSubmitted) {
         if (props.isCorrect) {
@@ -65,10 +66,7 @@ export default defineComponent({
 
     const onClick = () => {
       if (!props.isSubmitted) {
-        store.commit(mutationTypes.SELECT_ANSWER, {
-          questionId: props.questionId,
-          optionIndex: props.optionIndex
-        });
+        emit('select-option', { questionId: props.questionId, optionIndex: props.optionIndex });
       }
     };
 

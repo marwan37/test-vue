@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6 bg-white border rounded-md shadow-md">
+  <div>
     <h2 class="text-xl font-bold mb-4">Quiz Stats</h2>
     <div class="flex justify-between mb-4">
       <p>Total Quizzes:</p>
