@@ -1,3 +1,9 @@
+<template>
+  <div class="pie-chart">
+    <Pie :data="chartData" :options="chartOptions" />
+  </div>
+</template>
+
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 import type { PropType } from 'vue';
@@ -56,3 +62,10 @@ export default defineComponent({
   }
 });
 </script>
+
+<style scoped>
+.pie-chart {
+  width: 100%;
+  height: 400px;
+}
+</style>

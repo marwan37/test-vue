@@ -1,0 +1,3 @@
+// action-types.ts
+export const GO_TO_NEXT_QUESTION = 'GO_TO_NEXT_QUESTION';
+export const GO_TO_PREVIOUS_QUESTION = 'GO_TO_PREVIOUS_QUESTION';

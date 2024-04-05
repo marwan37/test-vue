@@ -2,6 +2,8 @@
 import { type InjectionKey } from 'vue'
 import type { QuizState, QuizMode, QuizResult } from '@/types';
 import { createStore, Store } from 'vuex'
+import * as mutationTypes from './mutation-types';
+import * as actionTypes from './action-types';
 import practiceQuestions from '@/qbank/practice_1.json';
 
 export const initialState: QuizState = {
@@ -18,14 +20,13 @@ export const initialState: QuizState = {
 
 export const key: InjectionKey<Store<QuizState>> = Symbol()
 
-
 const store = createStore<QuizState>({
   state: initialState,
   mutations: {
-    setMode(state: QuizState, mode: QuizMode) {
+    [mutationTypes.SET_MODE](state: QuizState, mode: QuizMode) {
       state.mode = mode;
     },
-    selectAnswer(state: QuizState, { questionId, optionIndex }: { questionId: string; optionIndex: number }) {
+    [mutationTypes.SELECT_ANSWER](state: QuizState, { questionId, optionIndex }: { questionId: string; optionIndex: number }) {
       const question = state.questions.find((q) => q.id === questionId);
       if (question) {
         const numberOfCorrectAnswers = question.options.filter((option) => option.isCorrect).length;
@@ -46,31 +47,39 @@ const store = createStore<QuizState>({
       }
       return state;
     },
-    submitAnswer(state: QuizState, questionId: string) {
+    [mutationTypes.SUBMIT_ANSWER](state: QuizState, questionId: string) {
       state.isSubmitted[questionId] = true;
     },
-    nextQuestion(state: QuizState) {
+    [mutationTypes.NEXT_QUESTION](state: QuizState) {
       if (state.currentQuestionIndex < state.questions.length - 1) {
         state.currentQuestionIndex += 1;
       }
     },
-    prevQuestion(state: QuizState) {
+    [mutationTypes.PREV_QUESTION](state: QuizState) {
       if (state.currentQuestionIndex > 0) {
         state.currentQuestionIndex -= 1;
       }
     },
-    addQuizResult(state: QuizState, result: QuizResult) {
+    [mutationTypes.ADD_QUIZ_RESULT](state: QuizState, result: QuizResult) {
       state.quizHistory.push(result);
     },
-    resetQuiz(state: QuizState) {
+    [mutationTypes.RESET_QUIZ](state: QuizState) {
       state.timer = state.mode === 'timed' ? state.questions.length * 90 : 0;
       state.isSubmitted = {};
       state.selectedAnswers = {};
     },
   },
   actions: {
-    // Actions can be used for asynchronous operations.
-    // For simple state updates, you might not need them.
+    [actionTypes.GO_TO_NEXT_QUESTION]({ commit, state }) {
+      if (state.currentQuestionIndex < state.questions.length - 1) {
+        commit('nextQuestion');
+      }
+    },
+    [actionTypes.GO_TO_PREVIOUS_QUESTION]({ commit, state }) {
+      if (state.currentQuestionIndex > 0) {
+        commit('prevQuestion');
+      }
+    },
   },
   getters: {
     currentQuestion: (state: QuizState) => state.questions[state.currentQuestionIndex],

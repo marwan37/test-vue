@@ -10,6 +10,7 @@
 import { defineComponent, computed } from 'vue';
 import { useStore } from 'vuex';
 import Button from 'primevue/button';
+import * as mutationTypes from '@/store/mutation-types';
 
 export default defineComponent({
   name: 'AnswerOption',
@@ -64,7 +65,7 @@ export default defineComponent({
 
     const onClick = () => {
       if (!props.isSubmitted) {
-        store.commit('selectAnswer', {
+        store.commit(mutationTypes.SELECT_ANSWER, {
           questionId: props.questionId,
           optionIndex: props.optionIndex
         });

@@ -15,6 +15,7 @@
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import { useStore } from 'vuex';
+import {computed} from "vue";
 
 const store = useStore();
 const quizHistory = computed(() =>

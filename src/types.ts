@@ -33,9 +33,9 @@ export interface QuizState {
 }
 
 export interface QuizMutations {
+  setMode: (mode: QuizMode) => void;
   selectAnswer: (questionId: string, optionIndex: number) => void;
   submitAnswer: (questionId: string) => void;
-  setMode: (mode: QuizMode) => void;
   nextQuestion: () => void;
   prevQuestion: () => void;
   decrementTimer: () => void;

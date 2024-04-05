@@ -1,4 +1,4 @@
-// composables/useAnswers.ts
+// composable/useAnswers.ts
 import type { ComputedRef } from 'vue';
 import { useStore } from 'vuex';
 import { useToast } from 'vue-toastification';

@@ -56,7 +56,7 @@ export default defineComponent({
     const selectedOptionIndices = computed(
       () => store.state.selectedAnswers[currentQuestion.value.id] || []
     );
-    const isQuestionSubmitted = computed(() => store.state.isSubmitted[currentQuestion.value.id]);
+    const isQuestionSubmitted = computed(() => store.state.isSubmitted[currentQuestion.value.id] || false);
     const isQuestionAnswered = computed(
       () => currentQuestion.value.id in store.state.selectedAnswers
     );
