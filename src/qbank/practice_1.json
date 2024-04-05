@@ -1,0 +1,666 @@
+[
+  {
+    "id": "q1",
+    "text": "A company has an on-premises Linux-based server with an Oracle database that runs on it. The company wants to migrate the database server to run on an Amazon EC2 instance in AWS. Which service should the company use to complete the migration?",
+    "options": [
+      {
+        "id": "opt1",
+        "text": "AWS Application Migration Service (AWS MGN)",
+        "isCorrect": true,
+        "explanation": "AWS MGN is an automated lift-and-shift solution. This solution can migrate physical servers and any databases or applications that run on them to EC2 instances in AWS."
+      },
+      {
+        "id": "opt2",
+        "text": "Migration Hub",
+        "isCorrect": false,
+        "explanation": "Migration Hub is a service that helps plan and track application migrations. Migration Hub does not perform system migrations."
+      },
+      {
+        "id": "opt3",
+        "text": "Application Discovery Service",
+        "isCorrect": false,
+        "explanation": "Application Discovery Service collects information about the usage and configuration of on-premises servers to help plan a migration to AWS. Application Discovery Service does not actually perform migration operations."
+      },
+      {
+        "id": "opt4",
+        "text": "AWS DMS",
+        "isCorrect": false,
+        "explanation": "AWS DMS can be used to migrate data from an on-premises database to a database in AWS. However, AWS DMS does not migrate the actual server to an EC2 instance."
+      }
+    ],
+    "category": "Migration",
+    "difficulty": "Medium"
+  },
+  {
+    "id": "q2",
+    "text": "A company requires a relational database on AWS that records new customer orders from a website. Which AWS service or feature will meet this requirement?",
+    "options": [
+      {
+        "id": "opt1",
+        "text": "Amazon Aurora",
+        "isCorrect": true,
+        "explanation": "Aurora is a MySQL- and PostgreSQL-compatible relational database built for the cloud. It combines the performance and availability of traditional enterprise databases with the simplicity and cost-effectiveness of open source databases."
+      },
+      {
+        "id": "opt2",
+        "text": "DynamoDB",
+        "isCorrect": false,
+        "explanation": "DynamoDB is a fully managed NoSQL database service. It provides fast and predictable performance with seamless scalability. However, DynamoDB is not a relational database."
+      },
+      {
+        "id": "opt3",
+        "text": "Global Accelerator",
+        "isCorrect": false,
+        "explanation": "Global Accelerator is a networking service that improves the performance of your users’ network traffic. It is not a relational database."
+      },
+      {
+        "id": "opt4",
+        "text": "Amazon EBS (Elastic Block Store)",
+        "isCorrect": false,
+        "explanation": "You can run a database on Amazon EC2 instances and use Amazon EBS for the storage for that database. However, Amazon EBS by itself is not a relational database."
+      }
+    ],
+    "category": "Database",
+    "difficulty": "Medium"
+  },
+  {
+    "id": "q3",
+    "text": "Which of the functionalities are characteristics of Amazon S3? (Select TWO.)",
+    "options": [
+      {
+        "id": "opt1",
+        "text": "An object store",
+        "isCorrect": true,
+        "explanation": "Amazon S3 is designed to be a highly scalable object storage service."
+      },
+      {
+        "id": "opt2",
+        "text": "A durable object storage system",
+        "isCorrect": true,
+        "explanation": "Amazon S3 provides comprehensive durability and secure storage."
+      },
+      {
+        "id": "opt3",
+        "text": "Local file store",
+        "isCorrect": false,
+        "explanation": "Amazon S3 is not a local file store; it is designed for cloud storage."
+      },
+      {
+        "id": "opt4",
+        "text": "Global file system",
+        "isCorrect": false,
+        "explanation": "While S3 can be accessed globally, it's not classified as a global file system."
+      },
+      {
+        "id": "opt5",
+        "text": "Network file system",
+        "isCorrect": false,
+        "explanation": "Amazon S3 does not operate as a network file system."
+      }
+    ],
+    "category": "Storage",
+    "difficulty": "Medium"
+  },
+  {
+    "id": "q4",
+    "text": "Which AWS service identifies security groups that allow unrestricted access to a user's AWS resources?",
+    "options": [
+      {
+        "id": "opt1",
+        "text": "Trusted Advisor",
+        "isCorrect": true,
+        "explanation": "Trusted Advisor checks security groups for rules that allow unrestricted access to a resource."
+      },
+      {
+        "id": "opt2",
+        "text": "AWS Config",
+        "isCorrect": false,
+        "explanation": "AWS Config monitors and records configurations, but does not specifically identify unrestricted access security groups."
+      },
+      {
+        "id": "opt3",
+        "text": "CloudWatch",
+        "isCorrect": false,
+        "explanation": "CloudWatch is a monitoring service for AWS cloud resources and applications, not for identifying security group configurations."
+      },
+      {
+        "id": "opt4",
+        "text": "CloudTrail",
+        "isCorrect": false,
+        "explanation": "CloudTrail provides an audit record of AWS API calls, not direct identification of security group configurations."
+      }
+    ],
+    "category": "Security",
+    "difficulty": "Medium"
+  },
+  {
+    "id": "q5",
+    "text": "A company wants to establish a consistent and private connection from the company's on-premises data center to the AWS Cloud. Which AWS service will meet these requirements?",
+    "options": [
+      {
+        "id": "opt1",
+        "text": "Direct Connect",
+        "isCorrect": true,
+        "explanation": "AWS Direct Connect is consistent and private because your company is the only user of the cable."
+      },
+      {
+        "id": "opt2",
+        "text": "Client VPN",
+        "isCorrect": false,
+        "explanation": "Client VPN is used for connecting individual devices to AWS, not an entire data center."
+      },
+      {
+        "id": "opt3",
+        "text": "Amazon Connect",
+        "isCorrect": false,
+        "explanation": "Amazon Connect is a cloud contact center service, not a connectivity service."
+      },
+      {
+        "id": "opt4",
+        "text": "Site-to-Site VPN",
+        "isCorrect": false,
+        "explanation": "Site-to-Site VPN uses the internet, so it cannot guarantee consistency or privacy on the level of Direct Connect."
+      }
+    ],
+    "category": "Networking",
+    "difficulty": "High"
+  },
+  {
+    "id": "q6",
+    "text": "What are the advantages of deploying an application with Amazon EC2 instances in multiple Availability Zones? (Select TWO.)",
+    "options": [
+      {
+        "id": "opt1",
+        "text": "Preventing a single point of failure",
+        "isCorrect": true,
+        "explanation": "The deployment of the EC2 instances in multiple Availability Zones prevents a single point of failure. Availability Zones are designed for physical redundancy and to provide resilience with uninterrupted performance."
+      },
+      {
+        "id": "opt2",
+        "text": "Increasing the availability of the application",
+        "isCorrect": true,
+        "explanation": "Hosting instances in multiple Availability Zones improves the overall availability of the application by providing physical redundancy."
+      },
+      {
+        "id": "opt3",
+        "text": "Increasing the load of the application",
+        "isCorrect": false,
+        "explanation": "Using multiple Availability Zones does not inherently increase the load of an application, but it helps to distribute and manage traffic more effectively."
+      },
+      {
+        "id": "opt4",
+        "text": "Reducing the operational costs of the application",
+        "isCorrect": false,
+        "explanation": "Deploying instances across multiple Availability Zones can lead to higher resilience and availability, but not necessarily lower operational costs."
+      },
+      {
+        "id": "opt5",
+        "text": "Allowing the application to serve cross-Region users with low latency",
+        "isCorrect": false,
+        "explanation": "Availability Zones are within the same Region. To serve cross-Region users with low latency, deploying applications in multiple Regions would be more effective."
+      }
+    ],
+    "category": "Compute",
+    "difficulty": "Medium"
+  },
+  {
+    "id": "q7",
+    "text": "Which tasks are the customer's responsibility according to the AWS shared responsibility model? (Select TWO.)",
+    "options": [
+      {
+        "id": "opt1",
+        "text": "Configure IAM users according to the principle of least privilege",
+        "isCorrect": true,
+        "explanation": "Within the AWS shared responsibility model, managing IAM users and permissions falls under the customer's responsibilities."
+      },
+      {
+        "id": "opt2",
+        "text": "Configure an Amazon S3 bucket to allow public access",
+        "isCorrect": true,
+        "explanation": "Determining access permissions to S3 buckets, including configuring public access, is the customer's responsibility."
+      },
+      {
+        "id": "opt3",
+        "text": "Patching the operating system of managed services",
+        "isCorrect": false,
+        "explanation": "Patching the operating system of AWS managed services, like RDS, is AWS's responsibility."
+      },
+      {
+        "id": "opt4",
+        "text": "Physical security of data centers",
+        "isCorrect": false,
+        "explanation": "The physical security of AWS data centers is managed entirely by AWS."
+      }
+    ],
+    "category": "Security",
+    "difficulty": "High"
+  },
+  {
+    "id": "q8",
+    "text": "What are benefits of using the AWS Cloud for companies with customers in many countries around the world? (Select TWO.)",
+    "options": [
+      {
+        "id": "opt1",
+        "text": "Companies can deploy applications in multiple AWS regions to reduce latency",
+        "isCorrect": true,
+        "explanation": "Deploying applications in AWS Regions closer to end-users reduces latency and improves performance."
+      },
+      {
+        "id": "opt2",
+        "text": "Amazon CloudFront has multiple edge locations around the world to reduce latency",
+        "isCorrect": true,
+        "explanation": "Amazon CloudFront's global network of edge locations helps deliver content with low latency."
+      },
+      {
+        "id": "opt3",
+        "text": "Using Amazon RDS to automatically translate application content into multiple languages",
+        "isCorrect": false,
+        "explanation": "Amazon RDS is a relational database service and does not provide content translation services."
+      },
+      {
+        "id": "opt4",
+        "text": "Automatic compliance with all international data protection laws",
+        "isCorrect": false,
+        "explanation": "While AWS provides tools to help with compliance, it's the customer's responsibility to ensure their applications comply with international data protection laws."
+      }
+    ],
+    "category": "Global Infrastructure",
+    "difficulty": "Medium"
+  },
+  {
+    "id": "q9",
+    "text": "A company requires an encrypted connection between the company's on-premises servers and AWS. The connection must use the company's existing internet connection. Which solution will meet these requirements?",
+    "options": [
+      {
+        "id": "opt1",
+        "text": "Site-to-Site VPN",
+        "isCorrect": true,
+        "explanation": "Site-to-Site VPN creates an encrypted network path between your on-premises network and your AWS Cloud network. This connection uses the internet."
+      },
+      {
+        "id": "opt2",
+        "text": "Amazon Connect",
+        "isCorrect": false,
+        "explanation": "Amazon Connect is a cloud contact center service, not a service for creating an encrypted network connection."
+      },
+      {
+        "id": "opt3",
+        "text": "CloudFront",
+        "isCorrect": false,
+        "explanation": "CloudFront is a content delivery network service, not a service for establishing encrypted network connections."
+      },
+      {
+        "id": "opt4",
+        "text": "Direct Connect",
+        "isCorrect": false,
+        "explanation": "Direct Connect provides a dedicated network connection but does not use the company's existing internet connection."
+      }
+    ],
+    "category": "Networking",
+    "difficulty": "Medium"
+  },
+  {
+    "id": "q10",
+    "text": "A company is moving all of their development activities to AWS. The company wants a solution to store and manage their developers' source code. Which AWS coding service will meet this requirement?",
+    "options": [
+      {
+        "id": "opt1",
+        "text": "CodeCommit",
+        "isCorrect": true,
+        "explanation": "CodeCommit is a source code version control service that helps users store and manage developers' source code in AWS."
+      },
+      {
+        "id": "opt2",
+        "text": "CodePipeline",
+        "isCorrect": false,
+        "explanation": "CodePipeline is a continuous integration and continuous delivery service for fast and reliable application and infrastructure updates. It does not store source code."
+      },
+      {
+        "id": "opt3",
+        "text": "CodeBuild",
+        "isCorrect": false,
+        "explanation": "CodeBuild compiles source code, runs tests, and produces software packages, but it is not a source code storage service."
+      },
+      {
+        "id": "opt4",
+        "text": "CodeArtifact",
+        "isCorrect": false,
+        "explanation": "CodeArtifact is a managed artifact repository service, not a service for managing source code repositories."
+      }
+    ],
+    "category": "Developer Tools",
+    "difficulty": "Medium"
+  },
+  {
+    "id": "q11",
+    "text": "A user needs to automatically discover, classify, and protect sensitive data stored in Amazon S3. Which AWS service can meet these requirements?",
+    "options": [
+      {
+        "id": "opt1",
+        "text": "Amazon Macie",
+        "isCorrect": true,
+        "explanation": "Macie is an automated security assessment service that helps improve the security and compliance of applications deployed on AWS, including the ability to discover, classify, and protect sensitive data stored in Amazon S3."
+      },
+      {
+        "id": "opt2",
+        "text": "Amazon Inspector",
+        "isCorrect": false,
+        "explanation": "Amazon Inspector is an automated security assessment service that helps improve security and compliance of applications deployed on Amazon EC2 instances, but it does not perform S3 data classification and automatic discovery."
+      },
+      {
+        "id": "opt3",
+        "text": "GuardDuty",
+        "isCorrect": false,
+        "explanation": "GuardDuty is a threat detection service that continuously monitors for malicious activity, not a data classification service for S3."
+      },
+      {
+        "id": "opt4",
+        "text": "Secrets Manager",
+        "isCorrect": false,
+        "explanation": "Secrets Manager helps protect secrets needed to access your applications, services, and IT resources, but does not classify or discover data in S3."
+      }
+    ],
+    "category": "Security",
+    "difficulty": "High"
+  },
+  {
+    "id": "q12",
+    "text": "A user deploys an Amazon RDS DB instance in multiple Availability Zones. This strategy involves which pillar of the AWS Well-Architected Framework?",
+    "options": [
+      {
+        "id": "opt1",
+        "text": "Reliability",
+        "isCorrect": true,
+        "explanation": "The reliability pillar includes the ability of a workload to perform its intended function correctly and consistently when it is expected to do so. The deployment of Amazon RDS in multiple Availability Zones supports the goal of reliability because it reduces single points of failure."
+      },
+      {
+        "id": "opt2",
+        "text": "Cost optimization",
+        "isCorrect": false,
+        "explanation": "The cost optimization pillar includes the ability to run systems to deliver business value at the lowest price point. Reliability is supported by using resources in multiple Availability Zones. The use of multiple Availability Zones for resources will increase cost."
+      },
+      {
+        "id": "opt3",
+        "text": "Security",
+        "isCorrect": false,
+        "explanation": "The security pillar includes the ability to protect data, systems, and assets to take advantage of cloud technologies to improve a company's security. The use of multiple Availability Zones for resources does not make an application more secure."
+      },
+      {
+        "id": "opt4",
+        "text": "Performance efficiency",
+        "isCorrect": false,
+        "explanation": "The performance efficiency pillar includes the ability to use computing resources efficiently to meet system requirements, and to maintain that efficiency as demand changes and technologies evolve. The use of multiple Availability Zones does not increase performance efficiency."
+      }
+    ],
+    "category": "Architecture",
+    "difficulty": "Medium"
+  },
+  {
+    "id": "q13",
+    "text": "Which credential components are required to gain programmatic access to an AWS account? (Select TWO.)",
+    "options": [
+      {
+        "id": "opt1",
+        "text": "An access key ID",
+        "isCorrect": true,
+        "explanation": "Programmatic access requires an access key ID and a secret access key that can be assigned to an AWS user."
+      },
+      {
+        "id": "opt2",
+        "text": "A secret access key",
+        "isCorrect": true,
+        "explanation": "Programmatic access requires an access key ID and a secret access key that can be assigned to an AWS user."
+      },
+      {
+        "id": "opt3",
+        "text": "A user ID",
+        "isCorrect": false,
+        "explanation": "A user ID is used for IAM security credentials, but not for programmatic access."
+      },
+      {
+        "id": "opt4",
+        "text": "A secondary key",
+        "isCorrect": false,
+        "explanation": "A secondary key is a feature used in database management. It does not grant AWS account access."
+      },
+      {
+        "id": "opt5",
+        "text": "A primary key",
+        "isCorrect": false,
+        "explanation": "A primary key is a feature used in database management. It does not grant AWS account access."
+      }
+    ],
+    "category": "Access Management",
+    "difficulty": "Medium"
+  },
+  {
+    "id": "q14",
+    "text": "Each department within a company has its own independent AWS account and its own payment method. The company needs to centralize departmental governance and consolidate payments. How can the company achieve these objectives by using AWS services or features?",
+    "options": [
+      {
+        "id": "opt1",
+        "text": "Create an organization in AWS Organizations with all features enabled within one account. Invite all accounts to join the organization.",
+        "isCorrect": true,
+        "explanation": "Organizations provides centralized governance and billing for an AWS environment, including multiple accounts."
+      },
+      {
+        "id": "opt2",
+        "text": "OpsCenter",
+        "isCorrect": false,
+        "explanation": "OpsCenter provides a central location for IT professionals to view, investigate, and resolve operational work items. OpsCenter does not consolidate billing."
+      },
+      {
+        "id": "opt3",
+        "text": "AWS Cloud Map",
+        "isCorrect": false,
+        "explanation": "AWS Cloud Map creates and maintains a map of backend services. AWS Cloud Map will not address governance or payment consolidation."
+      },
+      {
+        "id": "opt4",
+        "text": "AWS Cost and Usage Reports page of the Billing and Cost Management console",
+        "isCorrect": false,
+        "explanation": "This solution consolidates the billing in a report, but it will work only for the individual accounts (without cross-account billing). This solution does not address central governance."
+      }
+    ],
+    "category": "Billing & Governance",
+    "difficulty": "High"
+  },
+  {
+    "id": "q15",
+    "text": "A company needs to monitor and receive alerts about AWS Management Console sign-in events that involve the AWS account root user. Which AWS service can the company use to meet these requirements?",
+    "options": [
+      {
+        "id": "opt1",
+        "text": "Amazon CloudWatch",
+        "isCorrect": true,
+        "explanation": "CloudWatch monitors your AWS resources and the applications that you run on AWS in real time. You can use CloudWatch with AWS CloudTrail to monitor and receive alerts about console sign-in events that involve the AWS account root user."
+      },
+      {
+        "id": "opt2",
+        "text": "AWS Config",
+        "isCorrect": false,
+        "explanation": "You can use AWS Config to assess, audit, and evaluate the configurations of your AWS resources. AWS Config cannot alert you about console sign-in events that involve the AWS account root user."
+      },
+      {
+        "id": "opt3",
+        "text": "Trusted Advisor",
+        "isCorrect": false,
+        "explanation": "You can use Trusted Advisor for real-time guidance to help you provision your resources according to AWS best practices. Trusted Advisor cannot alert you about console sign-in events that involve the AWS account root user."
+      },
+      {
+        "id": "opt4",
+        "text": "IAM",
+        "isCorrect": false,
+        "explanation": "With IAM, you can manage access to AWS services and resources securely. IAM cannot alert you about console sign-in events that involve the AWS account root user."
+      }
+    ],
+    "category": "Monitoring",
+    "difficulty": "Medium"
+  },
+  {
+    "id": "q16",
+    "text": "Which AWS service allows customers to purchase unused Amazon EC2 capacity at an often discounted rate?",
+    "options": [
+      {
+        "id": "opt1",
+        "text": "Spot Instances",
+        "isCorrect": true,
+        "explanation": "With Spot Instances, you can access unused EC2 capacity. Spot Instances can be discounted."
+      },
+      {
+        "id": "opt2",
+        "text": "Dedicated Instances",
+        "isCorrect": false,
+        "explanation": "Dedicated Instances run in VPCs on hardware dedicated to that individual customer and are often used when there are licensing or compliance constraints. Dedicated Instances are not discounted."
+      },
+      {
+        "id": "opt3",
+        "text": "On-Demand Instances",
+        "isCorrect": false,
+        "explanation": "On-Demand Instances are the default purchase option and are immediately available. On-Demand Instances are not discounted."
+      },
+      {
+        "id": "opt4",
+        "text": "Reserved Instances",
+        "isCorrect": false,
+        "explanation": "Reserved Instances reserve some capacity for your use at any time. Reserved Instances can sometimes give you a discount. However, this capacity is not unused capacity."
+      }
+    ],
+    "category": "Compute",
+    "difficulty": "Easy"
+  },
+  {
+    "id": "q17",
+    "text": "A company wants to create a learning application for students. The learning application must give students the option to choose a button to have the text read out loud to them. Which AWS machine learning service will meet this requirement?",
+    "options": [
+      {
+        "id": "opt1",
+        "text": "Amazon Polly",
+        "isCorrect": true,
+        "explanation": "Amazon Polly is a machine learning service that converts text to speech. This service provides the ability to read text out loud."
+      },
+      {
+        "id": "opt2",
+        "text": "Amazon Transcribe",
+        "isCorrect": false,
+        "explanation": "Amazon Transcribe is a service that uses ML to convert audio data to text."
+      },
+      {
+        "id": "opt3",
+        "text": "Amazon Translate",
+        "isCorrect": false,
+        "explanation": "Amazon Translate is a ML language translation service."
+      },
+      {
+        "id": "opt4",
+        "text": "Amazon Textract",
+        "isCorrect": false,
+        "explanation": "Amazon Textract is a ML service that can extract text from scanned documents."
+      }
+    ],
+    "category": "Machine Learning",
+    "difficulty": "Easy"
+  },
+  {
+    "id": "q18",
+    "text": "What is the MINIMUM AWS Support plan that provides technical support through phone calls?",
+    "options": [
+      {
+        "id": "opt1",
+        "text": "Business",
+        "isCorrect": true,
+        "explanation": "You can call or chat with technical support by using the Business Support plan or the Enterprise Support plan. The Business Support plan is the minimum plan that provides this feature."
+      },
+      {
+        "id": "opt2",
+        "text": "Basic",
+        "isCorrect": false,
+        "explanation": "The Basic Support plan provides customer support for non-technical issues, such as increases in service quotas. However, the Basic Support plan does not provide technical support."
+      },
+      {
+        "id": "opt3",
+        "text": "Developer",
+        "isCorrect": false,
+        "explanation": "The Developer Support plan allows only email creation of support tickets and does not provide phone support."
+      },
+      {
+        "id": "opt4",
+        "text": "Enterprise",
+        "isCorrect": false,
+        "explanation": "The Enterprise Support plan provides phone support, but it is not the minimum plan to do so."
+      }
+    ],
+    "category": "Support",
+    "difficulty": "Medium"
+  },
+  {
+    "id": "q19",
+    "text": "A company is hosting a static website from a single Amazon S3 bucket. Which AWS service will achieve lower latency and high transfer speeds?",
+    "options": [
+      {
+        "id": "opt1",
+        "text": "Amazon CloudFront",
+        "isCorrect": true,
+        "explanation": "CloudFront is a web service that speeds up the distribution of your static and dynamic web content, such as .html, .css, .js, and image files, to your users. Content is cached in edge locations. Content that is repeatedly accessed can be served from the edge locations instead of the source S3 bucket."
+      },
+      {
+        "id": "opt2",
+        "text": "Route 53",
+        "isCorrect": false,
+        "explanation": "Route 53 is a highly available and scalable DNS web service. The three main functions of Route 53 are registering domain names, routing internet traffic to the resources for your domain, and checking the health of those resources. Route 53 can direct traffic to S3 buckets. But because the question describes only one S3 bucket, Route 53 would have only one potential route and could not reduce latency."
+      },
+      {
+        "id": "opt3",
+        "text": "DAX",
+        "isCorrect": false,
+        "explanation": "DAX is used to reduce response times from a DynamoDB table from single-digit milliseconds to microseconds. DynamoDB tables cannot host static websites."
+      },
+      {
+        "id": "opt4",
+        "text": "Elastic Beanstalk",
+        "isCorrect": false,
+        "explanation": "Elastic Beanstalk is a service to deploy and scale web applications and services developed with common programming languages on automatically deployed infrastructure with capacity management, load balancing, auto scaling, and monitoring. Elastic Beanstalk makes it easier to provision and support an application. Elastic Beanstalk does not reduce website latency."
+      }
+    ],
+    "category": "Content Delivery",
+    "difficulty": "Hard"
+  },
+  {
+    "id": "q20",
+    "text": "How does AWS charge for AWS Lambda usage once the free tier has been exceeded? (Select TWO.)",
+    "options": [
+      {
+        "id": "opt1",
+        "text": "By the time it takes for the Lambda function to run",
+        "isCorrect": true,
+        "explanation": "Lambda charges are dependent on the amount of time it takes to run the code."
+      },
+      {
+        "id": "opt2",
+        "text": "By the number of requests made for a given Lambda function to run",
+        "isCorrect": true,
+        "explanation": "Lambda charges are dependent on the number of requests for your Lambda functions."
+      },
+      {
+        "id": "opt3",
+        "text": "The programming language",
+        "isCorrect": false,
+        "explanation": "The programming language that is used to create the Lambda function does not contribute to the cost. You are charged based on the number of requests for your Lambda functions and the duration of time it takes for your code to run."
+      },
+      {
+        "id": "opt4",
+        "text": "The number of functions",
+        "isCorrect": false,
+        "explanation": "There is no charge based on the number of functions in an AWS account. You are charged based on the number of requests for your Lambda functions and the duration of time it takes for your code to run."
+      },
+      {
+        "id": "opt5",
+        "text": "The number of versions",
+        "isCorrect": false,
+        "explanation": "The number of versions of a specific Lambda function does not contribute to the cost. You are charged based on the number of requests for your Lambda functions and the duration of time it takes for your code to run."
+      }
+    ],
+    "category": "Pricing",
+    "difficulty": "Hard"
+  }
+]
