@@ -1,28 +1,26 @@
-import type { QuizMode, AnsweredQuestion, Question, QuizResult } from '@/types';
+import type { QuizMode, AnsweredQuestion, GeneratedQuizResult, QuestionDetails } from '@/types';
 
 export const generateResult = (
-  questions: Question[],
-  selectedAnswers: Record<string, number[]>,
+  questions: QuestionDetails[],
+  selectedAnswers: Record<string, string[]>,
   mode: QuizMode,
   timer: number,
-): QuizResult => {
+): GeneratedQuizResult => {
   let correctAnswers = 0;
   let incorrectAnswers = 0;
   let omittedAnswers = 0;
   let answeredQuestions: AnsweredQuestion[] = [];
 
   questions.forEach(question => {
-    const selectedIndices = selectedAnswers[question.id] || [];
-    const correctIndices = question.options
-      .map((option, index) => option.isCorrect ? index : null)
-      .filter(index => index !== null) as number[];
+    const selectedOptions = selectedAnswers[question.id] || [];
+    const correctOptions = question.options.filter(opt => opt.isCorrect)
 
-    const isCorrect = correctIndices.length === selectedIndices.length &&
-      correctIndices.every(index => selectedIndices.includes(index));
+    const isCorrect = correctOptions.length === selectedOptions.length &&
+      correctOptions.every(opt => selectedOptions.includes(opt.id));
 
     if (isCorrect) {
       correctAnswers++;
-    } else if (selectedIndices.length === 0) {
+    } else if (selectedOptions.length === 0) {
       omittedAnswers++;
     } else {
       incorrectAnswers++;
@@ -30,7 +28,7 @@ export const generateResult = (
 
     answeredQuestions.push({
       questionId: question.id,
-      selectedIndices,
+      selectedOptions,
       isCorrect,
     });
   });

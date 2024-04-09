@@ -29,8 +29,15 @@ CREATE TABLE answered_questions (
   id INT AUTO_INCREMENT PRIMARY KEY,
   quiz_result_id INT NOT NULL,
   question_id VARCHAR(36) NOT NULL,
-  selected_options JSON NOT NULL,
   is_correct BOOLEAN NOT NULL,
   FOREIGN KEY (quiz_result_id) REFERENCES quiz_results(id),
   FOREIGN KEY (question_id) REFERENCES questions(id)
+);
+
+CREATE TABLE answered_question_options (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  answered_question_id INT NOT NULL,
+  option_id VARCHAR(36) NOT NULL,
+  FOREIGN KEY (answered_question_id) REFERENCES answered_questions(id),
+  FOREIGN KEY (option_id) REFERENCES options(id)
 );

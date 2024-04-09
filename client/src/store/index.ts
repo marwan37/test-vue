@@ -1,6 +1,6 @@
 // store/index.ts
-import { fetchComprehensiveQuizResult, fetchQuestions, fetchQuizHistory, fetchQuizResultById, saveAnsweredQuestions, saveQuizResult } from '@/services/api';
-import type { Question, QuizState } from '@/types';
+import { fetchComprehensiveQuizResult, fetchQuestions, fetchQuizHistory, fetchQuizResultById, fetchUsedQuestionIds, saveAnsweredQuestions, saveQuizResult } from '@/services/api';
+import type { QuestionDetails, QuizState } from '@/types';
 import { type InjectionKey } from 'vue';
 import { Store, createStore } from 'vuex';
 import * as actions from './constants/actions';
@@ -42,7 +42,7 @@ const store = createStore<QuizState>({
     [mutations.SET_TOTAL_QUESTIONS](state: QuizState, totalQuestions: number) {
       state.totalQuestions = totalQuestions;
     },
-    [mutations.SET_QUESTIONS](state: QuizState, questions: Question[]) {
+    [mutations.SET_QUESTIONS](state: QuizState, questions: QuestionDetails[]) {
       // console.log('[Mutation] SET_QUESTIONS', questions);
       state.questions = questions;
     },
@@ -66,6 +66,9 @@ const store = createStore<QuizState>({
       if (status) {
         state.suspendedTimer = state.timer;
       }
+    },
+    [mutations.SET_LATEST_QUIZ_RESULT](state, quizResult) {
+      state.latestQuizResult = quizResult;
     },
     [mutations.RESUME_QUIZ](state) {
       state.suspended = false;
@@ -136,9 +139,6 @@ const store = createStore<QuizState>({
         state.timer--;
       }
     },
-    [mutations.SET_LATEST_QUIZ_RESULT](state, quizResult) {
-      state.latestQuizResult = quizResult;
-    },
   },
   actions: {
     [actions.GO_TO_NEXT_QUESTION]({ commit, state }) {
@@ -191,21 +191,21 @@ const store = createStore<QuizState>({
         const formattedQuizHistory = quizHistory.map((quizResult) => ({
           id: quizResult.id,
           mode: quizResult.mode,
-          correctAnswers: quizResult.correct_answers,
-          incorrectAnswers: quizResult.incorrect_answers,
-          omittedAnswers: quizResult.omitted_answers,
-          totalQuestions: quizResult.total_questions,
-          timeSpent: quizResult.time_spent,
+          correctAnswers: quizResult.correctAnswers,
+          incorrectAnswers: quizResult.incorrectAnswers,
+          omittedAnswers: quizResult.omittedAnswers,
+          totalQuestions: quizResult.totalQuestions,
+          timeSpent: quizResult.timeSpent,
           timestamp: new Date(quizResult.timestamp).toLocaleString(),
-          usedQuestionIds: quizResult.used_question_ids,
         }));
         commit(mutations.SET_QUIZ_HISTORY, formattedQuizHistory);
-
-        const usedQuestionIds = [...new Set(formattedQuizHistory.flatMap((result) => result.usedQuestionIds))];
-        commit(mutations.SET_USED_QUESTION_IDS, usedQuestionIds);
       } catch (error) {
         console.error('Error fetching quiz history:', error);
       }
+    },
+    async [actions.FETCH_USED_QUESTION_IDS]({ commit }) {
+      const usedQuestionIds = await fetchUsedQuestionIds();
+      commit(mutations.SET_USED_QUESTION_IDS, usedQuestionIds);
     },
     async [actions.FETCH_COMPREHENSIVE_QUIZ_RESULT]({ commit }, quizResultId: number) {
       try {

@@ -129,6 +129,7 @@ onMounted(async () => {
   if (store.state.quizHistory === null) {
     await store.dispatch(actions.FETCH_QUIZ_HISTORY);
   }
+
   if (store.getters.totalQuestions === 0) {
     await store.dispatch(actions.FETCH_QUESTIONS);
   }

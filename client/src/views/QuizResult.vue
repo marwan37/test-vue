@@ -28,8 +28,8 @@
     <div class="card">
       <DataTable :value="answeredQuestions">
         <Column field="questionNumber" header="Question"></Column>
-        <Column field="selectedAnswer" header="Your Answer"></Column>
-        <Column field="correctAnswer" header="Correct Answer"></Column>
+        <Column field="selectedAnswers" header="Your Answer"></Column>
+        <Column field="correctAnswers" header="Correct Answer"></Column>
         <Column field="category" header="Category"></Column>
         <Column field="difficulty" header="Difficulty"></Column>
         <Column header="Result">
@@ -54,11 +54,12 @@ import { useRouter } from 'vue-router';
 const store = useStore();
 const router = useRouter();
 
-const quizResult = computed(() => store.getters.latestQuizResult);
+// QuizResultRow[]
+const quizResultRows = computed(() => store.getters.latestQuizResult);
 
-const correctAnswers = computed(() => quizResult.correctAnswers);
-const incorrectAnswers = computed(() => quizResult.incorrectAnswers);
-const totalQuestions = computed(() => quizResult.totalQuestions);
+const correctAnswers = computed(() => quizResultRows.value.filter(row => row.isCorrect).length);
+const incorrectAnswers = computed(() => quizResultRows.value.filter(row => !row.isCorrect).length);
+const totalQuestions = computed(() => quizResultRows.value.length);
 const correctPercentage = computed(() => ((correctAnswers / totalQuestions) * 100).toFixed(0));
 
 const answeredQuestions = computed(() => {
@@ -67,24 +68,18 @@ const answeredQuestions = computed(() => {
     console.warn('Quiz result or questions for quizResult is undefined.');
     return [];
   }
-  return quizResult.value.questions.map((question, index) => {
-    const selectedAnswer = question.options
-      .filter(option => question.selectedIndices.includes(option.id))
-      .map(option => option.text)
-      .join(', ');
+  return quizResultRows.value.map((row, index) => {
+    const selectedAnswers = row.selectedOptions.map(option => option.text).join(', ');
 
-    const correctAnswer = question.options
-      .filter(option => option.isCorrect)
-      .map(option => option.text)
-      .join(', ');
+    const correctAnswers = row.correctOptions.map(option => option.text).join(', ');
 
     return {
       questionNumber: index + 1,
-      selectedAnswer: selectedAnswer,
-      correctAnswer: correctAnswer,
-      category: question.category,
-      difficulty: question.difficulty,
-      isCorrect: question.isCorrect
+      selectedAnswers,
+      correctAnswers,
+      category: row.question.category,
+      difficulty: row.question.difficulty,
+      isCorrect: row.isCorrect
     };
   });
 });

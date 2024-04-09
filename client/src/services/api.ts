@@ -1,31 +1,18 @@
 // src/services/api.ts
 import axios from 'axios';
-import type { AnsweredQuestion, ProcessedQuizResult, Question, QuizResult, QuizResultResponse } from '@/types';
+import type { AnsweredQuestion, QuestionDetails, QuizResult, QuizResultDetails, QuizResultRow } from '@/types';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 /**
  * Fetch the questions from the server
  * 
- * @returns The questions
+ * @returns {QuestionDetails[]} The questions, with the options and explanations
  */
-export async function fetchQuestions(): Promise<Question[]> {
+export async function fetchQuestions(): Promise<QuestionDetails[]> {
   try {
     const response = await axios.get(`${API_URL}/questions`);
-
-    const questions = response.data.map((question: any) => ({
-      id: question.id,
-      text: question.text,
-      category: question.category,
-      difficulty: question.difficulty,
-      options: question.options.map((option: any) => ({
-        id: option.id,
-        text: option.text,
-        isCorrect: option.is_correct,
-        explanation: option.explanation,
-      })),
-    }));
-    return questions;
+    return response.data;
   } catch (error) {
     console.error('Error fetching questions:', error);
     throw error;
@@ -37,7 +24,7 @@ export async function fetchQuestions(): Promise<Question[]> {
  * 
  * @returns The quiz history
  */
-export async function fetchQuizHistory(): Promise<QuizResultResponse[]> {
+export async function fetchQuizHistory(): Promise<QuizResultDetails[]> {
   try {
     const response = await axios.get(`${API_URL}/quiz-results`);
     return response.data;
@@ -51,9 +38,9 @@ export async function fetchQuizHistory(): Promise<QuizResultResponse[]> {
  * Save a quiz result
  * 
  * @param quizResult The quiz result
- * @returns The response from the server with the ID of the quiz result
+ * @returns {number} The ID of the quiz result
  */
-export async function saveQuizResult(quizResult: QuizResult) {
+export async function saveQuizResult(quizResult: QuizResult): Promise<number> {
   try {
     const response = await axios.post(`${API_URL}/quiz-results`, quizResult);
     return response.data.id;
@@ -70,7 +57,7 @@ export async function saveQuizResult(quizResult: QuizResult) {
  * @param answeredQuestions The answered questions
  * @returns The response from the server
  */
-export async function saveAnsweredQuestions(quizResultId: number, answeredQuestions: AnsweredQuestion[]) {
+export async function saveAnsweredQuestions(quizResultId: number, answeredQuestions: AnsweredQuestion[]): Promise<void> {
   try {
     const response = await axios.post(`${API_URL}/answered-questions`,
       { quizResultId, answeredQuestions });
@@ -87,7 +74,7 @@ export async function saveAnsweredQuestions(quizResultId: number, answeredQuesti
  * @param quizResultId The ID of the quiz result
  * @returns The quiz result
  */
-export const fetchQuizResultById = async (quizResultId: number): Promise<QuizResultResponse> => {
+export const fetchQuizResultById = async (quizResultId: number): Promise<QuizResultDetails> => {
   try {
     const response = await axios.get(`${API_URL}/quiz-results/${quizResultId}`);
     return response.data;
@@ -101,9 +88,9 @@ export const fetchQuizResultById = async (quizResultId: number): Promise<QuizRes
  * Fetch the comprehensive quiz result by ID
  * 
  * @param quizResultId The ID of the quiz result
- * @returns The comprehensive quiz result
+ * @returns {Promise<QuizResultRow[]>} The quiz result rows (with selected and correct options)
  */
-export const fetchComprehensiveQuizResult = async (quizResultId: number): Promise<ProcessedQuizResult> => {
+export const fetchComprehensiveQuizResult = async (quizResultId: number): Promise<QuizResultRow[]> => {
   try {
     const response = await axios.get(`${API_URL}/quiz-results-comprehensive/${quizResultId}`);
     return response.data;
@@ -112,3 +99,19 @@ export const fetchComprehensiveQuizResult = async (quizResultId: number): Promis
     throw error;
   }
 };
+
+/**
+ * Fetch the used question IDs from the server
+ * 
+ * @returns {string[]} The used question IDs
+ */
+export const fetchUsedQuestionIds = async (): Promise<string[]> => {
+  try {
+    const response = await axios.get(`${API_URL}/used-questions`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching used question IDs:', error);
+    throw error;
+  }
+};
+
