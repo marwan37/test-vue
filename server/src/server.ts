@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from 'express';
 import cors from 'cors';
 import mysql from 'mysql2/promise';
@@ -5,10 +6,10 @@ import { FieldPacket, ResultSetHeader } from 'mysql2';
 import { AnsweredQuestion, AnsweredQuestionModel, ProcessedOption, ProcessedQuizResult, Question, QuizResult, QuizResultModel, QuizResultRow } from './types';
 
 const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'marwan',
-  password: '1337',
-  database: 'aws_world'
+  host: process.env.MYSQL_HOST,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE
 });
 
 const app = express();

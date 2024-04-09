@@ -1,3 +1,4 @@
+import 'dotenv/config';
 const fs = require('fs');
 const path = require('path');
 const mysql = require('mysql2/promise');
@@ -6,10 +7,10 @@ const { v4: uuidv4 } = require('uuid');
 const jsonDirectory = path.join(__dirname);
 
 const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'marwan',
-  password: '1337',
-  database: 'aws_world'
+  host: process.env.MYSQL_HOST,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE
 });
 
 async function importQuestions() {
